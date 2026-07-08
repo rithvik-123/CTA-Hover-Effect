@@ -137,11 +137,43 @@ nav {
     transform: scale(1.1) rotate(-4deg);
 }
 
-.hero-right img {
+/* =========================================
+   TASK 10: TRUE CIRCULAR ORBIT & SQUEEZE
+   ========================================= */
+
+.animated-machine {
     width: 90%;
     max-height: 70vh;
     object-fit: contain;
+    /* Running the animation continuously over 6 seconds */
+    animation: trueOrbit 6s linear infinite;
 }
+
+/* I learned that just using translate(x, y) draws a diamond, not a circle. 
+   To make a true circle without turning the image upside down, I have to rotate it, 
+   translate it outward, and then counter-rotate it back to 0 so it stays upright. 
+   I also added the scale() function to squeeze it at the top and bottom of the orbit. */
+@keyframes trueOrbit {
+    0% {
+        transform: rotate(0deg) translateX(30px) rotate(0deg) scale(1, 1);
+    }
+    25% {
+        /* Squeezing the image vertically at the right edge */
+        transform: rotate(90deg) translateX(30px) rotate(-90deg) scale(0.95, 1.05);
+    }
+    50% {
+        transform: rotate(180deg) translateX(30px) rotate(-180deg) scale(1, 1);
+    }
+    75% {
+        /* Squashing the image horizontally at the left edge */
+        transform: rotate(270deg) translateX(30px) rotate(-270deg) scale(1.05, 0.95);
+    }
+    100% {
+        transform: rotate(360deg) translateX(30px) rotate(-360deg) scale(1, 1);
+    }
+}
+
+/* ========================================= */
 
 @media (max-width: 1024px) {
     .logo {
